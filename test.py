@@ -66,7 +66,39 @@ if __name__ == "__main__":
         time.append(t)
         
     #PLOTING
-    fig_1 = pyplot.figure(1, figsize=(20,5))
-    chart_1 = fig_1.add_subplot(121)
-    chart_1.plot(time, final_lambda, 'o')
+    fig_1 = pyplot.figure(1, figsize=(20,10))
+    
+    #LAMBDA DISTRIBUTION
+    chart_1 = fig_1.add_subplot(221)
+    chart_1.hist(final_lambda, color="blue", ec="black", bins=15)
+    #NAMING
+    chart_1.set_title("The distribution of Lambda Parameter")
+    chart_1.set_xlabel("Lambda Value")
+    chart_1.set_ylabel("Count of Lambda Value")
+    
+    #TIME DISTRIBUTION
+    chart_2 = fig_1.add_subplot(222)
+    chart_2.hist(time, color="blue", ec="black", bins=15)
+    #NAMING
+    chart_2.set_title("The distribution of the Time Until Success")
+    chart_2.set_xlabel("Time to complete")
+    chart_2.set_ylabel("Count of Completion Time")
+    
+    #The average lambda parameter, given that we succeed at a given time t
+    chart_3 = fig_1.add_subplot(223)
+    lambda_at_time_t = {}
+    for i, e in enumerate(time):
+        lambda_at_time_t[e] = lambda_at_time_t.get(e, []) + [final_lambda[i]]
+    lambda_at_time_t = dict(sorted(lambda_at_time_t.items()))
+    
+    chart_3_time = list(lambda_at_time_t.keys())
+    chart_3_avr_lambda = [(sum(lambda_at_time_t[k]) / len(lambda_at_time_t[k])) for k in lambda_at_time_t]
+    chart_3.plot(chart_3_time, chart_3_avr_lambda)
+    #NAMING
+    chart_3.set_title("The average lambda parameter at time t")
+    chart_3.set_xlabel("Time to complete")
+    chart_3.set_ylabel("Average Lambda Value")
+    
+    
+    
     pyplot.show()
