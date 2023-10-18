@@ -40,7 +40,7 @@ for i in 1:num_of_simulation
     # PHASE 2
     l3 = Link(1, false)
     l4 = Link(1, false)
-    while !(l3.exist || l4.exist)
+    while !(l3.exist && l4.exist)
         r3 = rand()
         r4 = rand()
         if l3.exist
