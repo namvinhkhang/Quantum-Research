@@ -7,3 +7,7 @@ class Link:
 def final_lambda(l1, l2, l3):
     """Calculate the final lambda after 1 simulation"""
     return l1.val * l2.val * l3.val
+
+def final_lambda_distill(l1, l2, l3):
+    """Calculate the final lambda after 1 simulation"""
+    return l1.val * l2.val * l3.val
